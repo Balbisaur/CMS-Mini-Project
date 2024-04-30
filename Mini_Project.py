@@ -7,7 +7,7 @@ def read_contacts():
     try:
         with open('contacts_list.txt', 'r') as file:
             for line in file:
-                data = re.search(r'([\w\s]+)-:-([\d{3}-\d{3}-\d{4}]+)-:-([\w\s]+)', line)
+                data = re.search(r'([\w\s]+)-:-([\d-]+)-:-([\w\s@.]+)', line)
                 contacts[name] = {'Name': data.group(1), 'Phone Number': data.group(2), 'Email': data.group(3)}
     except FileNotFoundError:
         print('No Local files')
@@ -75,14 +75,11 @@ def management():
             elif action == 2:
                 pass
             elif action == 3:
-                pass
+                remove_contact(contacts)
             elif action == 4:
                 pass
             elif action == 5:
                 display(contacts)
-            elif action == 6:
-                pass
-            elif action == 7:
                 pass
             elif action == 8:
                 print("Quitting Contact Application.")
