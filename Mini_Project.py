@@ -39,7 +39,7 @@ def display(contacts):
 
 def remove_contact(contacts):
     display(contacts)
-    option = int(input("Select which contact you want to remove: "))
+    option = input("Select which contact you want to remove: ")
     contact = contacts.pop(option-1)
     print(f"Removed {contact['Name']}!")
     write_contacts(contacts)
