@@ -84,9 +84,7 @@ def management():
         3. Delete a contact
         4. Search for a contact
         5. Display all contacts
-        6. Export contacts to a text file
-        7. Import contacts from a text file
-        8. Quit 
+        6. Quit 
         ''')
         action = input("Enter your action: ")
         try:
@@ -102,12 +100,6 @@ def management():
             elif action == 5:
                 display(contacts)
             elif action == 6:
-                write_contacts(contacts)
-                print("Contacts exported successfully!")
-            elif action == 7:
-                contacts = read_contacts()
-                print("Contacts imported successfully!")
-            elif action == 8:
                 print("Quitting Contact Application.")
                 break
             else:
