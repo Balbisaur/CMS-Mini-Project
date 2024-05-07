@@ -8,13 +8,6 @@ def read_contacts():
         with open('contacts_list.txt', 'r') as file:
             for line in file:
                 data = re.search(r'([\w\s]+)-:-([\d-]+)-:-([\w\s@.]+)', line)
-    except FileNotFoundError:
-        print('No Local files')
-        return {}
-    else:
-        print('Importing Local Data...')
-        return contacts
-
 
 def write_contacts(contacts):
     with open('contacts_list.txt', 'w') as file:
@@ -22,9 +15,8 @@ def write_contacts(contacts):
             file.write(f"{info['Name']}-:-{info['Phone Number']}-:-{info['Email']}\n")
 
 
-def add_contact(contacts):
-    os.system('cls' if os.name == 'nt' else 'clear')
-    name = input('Name of Contact: ')
+def add_contact(contacts): 
+    name = input('Name of Contact: ') # asking the user to enter the contacts info.
     number = input('Number of Contact: ')
     email = input('Contact Email: ')
     contacts[name] = {'Name': name, 'Phone Number': number, 'Email': email}
@@ -33,7 +25,6 @@ def add_contact(contacts):
 
 
 def display(contacts):
-    os.system('cls' if os.name == 'nt' else 'clear')
     print('Contact List')
     print('------------')
     for idx, (name, info) in enumerate(contacts.items()):
@@ -41,7 +32,7 @@ def display(contacts):
 
 def edit_contact(contacts):
     display(contacts)
-    option = int(input("Select which contact you want to edit: "))
+    option = int(input("Select which contact you want to edit: ")) # asking the user to pick a contact that they would like to edit.
     contact = list(contacts.keys())[option-1]
     print(f"Editing {contact}:")
     new_name = input('New Name: ')
@@ -52,8 +43,8 @@ def edit_contact(contacts):
     print(f"{contact} edited successfully!")
 
 def search_contact(contacts):
-    search_query = input("Enter the name of the contact: ").lower()
-    search_results = [info for name, info in contacts.items() if search_query in name.lower()]
+    search_query = input("Enter the name of the contact: ").lower()# able to search for a contact in the contacts lists and used .lower() so incase they used caps, there wouldn't be any errors
+    search_results = [info for name, info in contacts.items() if search_query in name.lower()] 
     if search_results:
         print("Search Results:")
         for idx, result in enumerate(search_results):
@@ -63,10 +54,10 @@ def search_contact(contacts):
 
 
 def remove_contact(contacts):
-    display(contacts)
+    display(contacts) #letting the user be able to delete a contact they no longer want in their contacts
     option = int(input("Select which contact you want to remove: "))
     contact = list(contacts.keys())[option-1]
-    del contacts[contact]
+    del contacts[contact] # using the del function to delete a certain contact. I tried using the pop() but wasn't working for me
     print(f"Removed {contact}!")
     write_contacts(contacts)
 
